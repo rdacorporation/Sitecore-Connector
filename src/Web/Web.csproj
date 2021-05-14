@@ -39,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Configy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -242,6 +243,7 @@
     <Content Include="sitecore modules\Web\MediaFramework\MVC\Views\EmbedMedia.cshtml" />
     <Content Include="sitecore\shell\client\Applications\ExperienceAnalytics\Common\Layouts\Renderings\MediaFramework\ExperienceAnalyticsListControl.cshtml" />
     <Content Include="sitecore modules\Web\MediaFramework\Upload\MediaUpload.ashx" />
+    <None Include="Properties\PublishProfiles\release.pubxml" />
     <None Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
