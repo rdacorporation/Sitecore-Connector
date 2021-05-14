@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  SITECORE_SOLUTION_PATH: ./src/Brightcove.MediaFramework.Brightcove.sln
+  SITECORE_PACKAGE_PROJECT_PATH: ./src/Web/Web.csproj
+  SITECORE_PACKAGE_STAGING_PATH: './out'
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup MSBuild path
+      uses: microsoft/setup-msbuild@v1.0.1
+      with:
+        vs-version: "[16.4,16.9)"
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+    
+    - name: Restore NuGet packages
+      run: nuget restore ${{ env.SITECORE_SOLUTION_PATH }}
+
+    - name: Build
+      run: msbuild ${{ env.SITECORE_SOLUTION_PATH }} /p:Configuration=Release
+
+    # - name: Publish to folder
+    #   run: msbuild ${{ env.SITECORE_PACKAGE_PROJECT_PATH }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.SITECORE_PACKAGE_STAGING_PATH }} /p:PackageAsSingleFile=false
